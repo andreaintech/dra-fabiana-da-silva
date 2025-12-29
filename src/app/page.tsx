@@ -1,9 +1,12 @@
+import Image from "next/image";
+
 export default function HomePage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 space-y-16">
       {/* HERO */}
-      <section className="grid gap-8 md:grid-cols-[1.4fr,1fr] items-center">
-        <div>
+      <section className="flex flex-col md:flex-row gap-8 items-start">
+        {/* Text Content */}
+        <div className="flex-1 flex flex-col">
           <p className="text-sm font-medium text-brand-dark mb-2">
             Médico Cirujano · Universidad de Carabobo
           </p>
@@ -34,12 +37,16 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="flex justify-center">
-          <div className="relative h-52 w-52 overflow-hidden rounded-3xl border border-brand-soft bg-gradient-to-br from-brand-soft to-white shadow-md">
-            {/* Aquí luego reemplazas por una <Image /> de Next */}
-            <div className="flex h-full w-full items-center justify-center text-center text-sm text-brand-dark px-4">
-              Foto profesional de la doctora
-            </div>
+        {/* Photo */}
+        <div className="flex justify-center md:justify-end">
+          <div className="relative h-80 w-80 md:h-96 md:w-96 overflow-hidden rounded-3xl border border-brand-soft bg-gradient-to-br from-brand-soft to-white shadow-md">
+            <Image
+              src="/dra-fabiana-da-silva.jpg"
+              alt="Dra. Fabiana Da Silva - Médico Cirujano"
+              fill
+              className="object-cover object-top"
+              priority
+            />
           </div>
         </div>
       </section>
@@ -217,7 +224,7 @@ export default function HomePage() {
         <div className="flex items-baseline justify-between gap-4">
           <h2 className="text-lg font-semibold">Opiniones de pacientes</h2>
           <span className="text-xs text-slate-500">
-            Algunos testimonios de pacientes
+            Algunos testimonios de mis pacientes
           </span>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
