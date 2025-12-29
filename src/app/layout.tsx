@@ -39,19 +39,19 @@ export default function RootLayout({
                 </div>
               </div>
               <div className="hidden gap-6 text-sm md:flex">
-                <a href="#sobre-mi" className="hover:text-brand">
+                <a href="#sobre-mi" className="hover:text-brand transition-colors duration-300">
                   Sobre mí
                 </a>
-                <a href="#servicios" className="hover:text-brand">
+                <a href="#servicios" className="hover:text-brand transition-colors duration-300">
                   Servicios
                 </a>
-                <a href="#opiniones" className="hover:text-brand">
+                <a href="#opiniones" className="hover:text-brand transition-colors duration-300">
                   Opiniones
                 </a>
-                <a href="#blog" className="hover:text-brand">
+                <a href="#blog" className="hover:text-brand transition-colors duration-300">
                   Blog
                 </a>
-                <a href="#contacto" className="hover:text-brand font-semibold">
+                <a href="#contacto" className="hover:text-brand font-semibold transition-colors duration-300">
                   Reservar cita
                 </a>
               </div>
