@@ -5,7 +5,7 @@ export default function HomePage() {
       <section className="grid gap-8 md:grid-cols-[1.4fr,1fr] items-center">
         <div>
           <p className="text-sm font-medium text-brand-dark mb-2">
-            Médico Cirujano · Valencia, Venezuela
+            Médico Cirujano · Universidad de Carabobo
           </p>
           <h1 className="text-3xl md:text-4xl font-semibold mb-3">
             Dra. Fabiana Da Silva
