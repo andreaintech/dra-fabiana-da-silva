@@ -10,6 +10,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-brand-light: #F9F5FF;
+  --color-brand: #7C3AED;
+  --color-brand-dark: #5B21B6;
+  --color-brand-soft: #E9D5FF;
+  --color-brand-accent: #A855F7;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,7 +25,5 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-brand-light text-slate-900;
 }
