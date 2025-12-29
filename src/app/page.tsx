@@ -88,11 +88,9 @@ export default function HomePage() {
           <div>
             <p className="font-semibold text-slate-700">Dirección de consulta</p>
             <p className="text-slate-600">
-              [Nombre del Centro / Consultorio]
+              Consulta a domicilio
               <br />
-              [Calle, edificio, piso]
-              <br />
-              Valencia, Carabobo · Venezuela
+              <span className="text-slate-600">En toda la región de Carabobo, Venezuela</span>
             </p>
           </div>
           <div>
