@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,9 +27,12 @@ export default function RootLayout({
                   D
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm font-semibold">
+                  <Link
+                    href="/"
+                    className="text-sm font-semibold hover:text-brand transition-colors"
+                  >
                     Dra. Fabiana Da Silva
-                  </span>
+                  </Link>
                   <span className="text-xs text-slate-500">
                     Médico Cirujano · Valencia, VE
                   </span>
@@ -57,8 +61,14 @@ export default function RootLayout({
           <footer className="border-t border-brand-soft bg-white">
             <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-2 px-4 py-4 text-xs text-slate-500">
               <span>
-                © {new Date().getFullYear()} Dra. Fabiana Da Silva - Todos los
-                derechos reservados.
+                © {new Date().getFullYear()}{" "}
+                <Link
+                  href="/"
+                  className="text-brand hover:underline"
+                >
+                  Dra. Fabiana Da Silva
+                </Link>{" "}
+                - Todos los derechos reservados.
               </span>
               <span>
                 Sitio informativo. No sustituye una consulta médica presencial
