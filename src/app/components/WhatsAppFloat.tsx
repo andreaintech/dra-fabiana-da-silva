@@ -39,7 +39,10 @@ export default function WhatsAppFloat() {
 
   // Play sound and vibrate after user interaction (scroll or click)
   useEffect(() => {
-    if (!hasPlayedSound && typeof window !== "undefined") {
+    // Only run on client side
+    if (typeof window === "undefined") return;
+    
+    if (!hasPlayedSound) {
       const playNotificationSound = () => {
         try {
           const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
@@ -111,8 +114,10 @@ export default function WhatsAppFloat() {
 
       return () => {
         clearTimeout(timer1);
-        window.removeEventListener("scroll", handleScroll);
-        window.removeEventListener("click", handleClick);
+        if (typeof window !== "undefined") {
+          window.removeEventListener("scroll", handleScroll);
+          window.removeEventListener("click", handleClick);
+        }
       };
     }
   }, [hasPlayedSound]);
