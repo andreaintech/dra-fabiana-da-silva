@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
+import WhatsAppFloat from "./components/WhatsAppFloat";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -69,6 +70,7 @@ export default function RootLayout({
             </nav>
           </header>
           <main className="flex-1">{children}</main>
+          <WhatsAppFloat />
           <footer className="border-t border-brand-soft bg-white">
             <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-2 px-4 py-4 text-xs text-slate-500">
               <span>
