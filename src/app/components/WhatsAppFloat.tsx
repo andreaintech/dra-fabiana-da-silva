@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const FAQ_QUESTIONS = [
   {
@@ -28,12 +28,94 @@ const FAQ_QUESTIONS = [
 export default function WhatsAppFloat() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState<number | null>(null);
+  const [hasPlayedSound, setHasPlayedSound] = useState(false);
+  const [isVibrating, setIsVibrating] = useState(false);
 
   const whatsappNumber = "584126476254";
   const whatsappMessage = encodeURIComponent(
     "Hola, me gustaría agendar una cita o hacer una consulta."
   );
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+  // Play sound and vibrate after user interaction (scroll or click)
+  useEffect(() => {
+    if (!hasPlayedSound && typeof window !== "undefined") {
+      const playNotificationSound = () => {
+        try {
+          const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+          const audioContext = new AudioContextClass();
+          
+          // Resume audio context if suspended (required for autoplay policies)
+          if (audioContext.state === "suspended") {
+            audioContext.resume();
+          }
+
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+
+          // More noticeable sound - higher frequency and volume
+          oscillator.frequency.value = 1000;
+          oscillator.type = "sine";
+          gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+
+          oscillator.start(audioContext.currentTime);
+          oscillator.stop(audioContext.currentTime + 0.4);
+        } catch (error) {
+          console.log("Could not play sound:", error);
+        }
+      };
+
+      const triggerEffects = () => {
+        playNotificationSound();
+        setHasPlayedSound(true);
+        setIsVibrating(true);
+
+        // Trigger device vibration if available
+        if ("vibrate" in navigator) {
+          navigator.vibrate([200, 100, 200]);
+        }
+
+        // Stop vibration animation after 1 second
+        setTimeout(() => {
+          setIsVibrating(false);
+        }, 1000);
+      };
+
+      // Try to play after a short delay (works if user has interacted)
+      const timer1 = setTimeout(() => {
+        triggerEffects();
+      }, 2000);
+
+      // Also trigger on first scroll (user interaction)
+      const handleScroll = () => {
+        if (!hasPlayedSound) {
+          triggerEffects();
+          window.removeEventListener("scroll", handleScroll);
+        }
+      };
+
+      // Also trigger on first click (user interaction)
+      const handleClick = () => {
+        if (!hasPlayedSound) {
+          triggerEffects();
+          window.removeEventListener("click", handleClick);
+        }
+      };
+
+      window.addEventListener("scroll", handleScroll, { once: true });
+      window.addEventListener("click", handleClick, { once: true });
+
+      return () => {
+        clearTimeout(timer1);
+        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("click", handleClick);
+      };
+    }
+  }, [hasPlayedSound]);
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
@@ -125,7 +207,7 @@ export default function WhatsAppFloat() {
         onClick={() => setIsOpen(!isOpen)}
         className={`relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-brand to-brand-accent text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group ${
           !isOpen ? "whatsapp-float whatsapp-pulse" : ""
-        }`}
+        } ${isVibrating ? "whatsapp-vibrate" : ""}`}
         aria-label="WhatsApp"
       >
         {!isOpen ? (

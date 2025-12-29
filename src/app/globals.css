@@ -135,3 +135,19 @@ html {
 .whatsapp-panel {
   animation: slideUp 0.3s ease-out;
 }
+
+@keyframes vibrate {
+  0%, 100% {
+    transform: translate(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate(-3px, -3px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translate(3px, 3px);
+  }
+}
+
+.whatsapp-vibrate {
+  animation: vibrate 0.5s ease-in-out;
+}
