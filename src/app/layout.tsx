@@ -55,7 +55,7 @@ export default function RootLayout({
           </header>
           <main className="flex-1">{children}</main>
           <footer className="border-t border-brand-soft bg-white">
-            <div className="mx-auto flex max-w-5xl flex-col gap-2 px-4 py-4 text-xs text-slate-500 md:flex-row md:items-center md:justify-between">
+            <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-2 px-4 py-4 text-xs text-slate-500">
               <span>
                 © {new Date().getFullYear()} Dra. Fabiana Da Silva - Todos los
                 derechos reservados.
@@ -63,6 +63,17 @@ export default function RootLayout({
               <span>
                 Sitio informativo. No sustituye una consulta médica presencial
                 ni de urgencias.
+              </span>
+              <span>
+                Made with love ♥ by{" "}
+                <a
+                  href="https://andreaintech.github.io/web/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-brand hover:underline"
+                >
+                  Andrea Da Silva
+                </a>
               </span>
             </div>
           </footer>
